@@ -8,12 +8,11 @@ DROP TABLE IF EXISTS Evaluation;
 
 
 CREATE TABLE IF NOT EXISTS Author(
-    authorId INTEGER NOT NULL PRIMARY KEY, 
+    authorDocument VARCHAR(99) NOT NULL PRIMARY KEY,
     name VARCHAR(99),
     email VARCHAR(99),
     password VARCHAR(99),
-    phone VARCHAR(99),
-    document VARCHAR(99)
+    phone VARCHAR(99)
 );
 CREATE TABLE IF NOT EXISTS Revisor(
     revisorId INTEGER NOT NULL PRIMARY KEY,
@@ -55,13 +54,13 @@ CREATE TABLE IF NOT EXISTS Article(
     evaluation1Id VARCHAR(99),
     evaluation2Id VARCHAR(99),
     evaluation3Id VARCHAR(99),
-    FOREIGN KEY (subAreaId) REFERENCES Subarea(subAreaId);
+    FOREIGN KEY (subAreaId) REFERENCES Subarea(subAreaId)
 );
 CREATE TABLE IF NOT EXISTS Author_x_Article(
     uid INTEGER NOT NULL PRIMARY KEY, 
-    authorId INT NOT NULL,
+    authorDocument VARCHAR(99) NOT NULL,
     articleId INT NOT NULL,
-    FOREIGN KEY (authorId) REFERENCES Author(authorId),
+    FOREIGN KEY (authorDocument) REFERENCES Author(authorDocument),
     FOREIGN KEY (articleId) REFERENCES Article(articleId)
 );
 CREATE TABLE IF NOT EXISTS Evaluation(

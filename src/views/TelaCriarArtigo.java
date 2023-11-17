@@ -1,4 +1,4 @@
-package screens;
+package views;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
