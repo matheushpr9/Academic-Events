@@ -3,7 +3,7 @@ package classes;
 import java.util.List;
 
 public class Activity {
-    private int uuid;
+    private int articleId;
     private String title;
     private String activityType; // palestra, painel, workshop, etc.
     private String startTime;
@@ -12,9 +12,9 @@ public class Activity {
     private List<Participant> registeredParticipants;
     //private List<String> listaEspera;
 
-    public Activity(int uuid, String title, String activityType, String startTime, String endTime, int roomId,
+    public Activity(int articleId, String title, String activityType, String startTime, String endTime, int roomId,
             List<Participant> registeredParticipants) {
-        this.uuid = uuid;
+        this.articleId = articleId;
         this.title = title;
         this.activityType = activityType;
         this.startTime = startTime;
@@ -23,12 +23,12 @@ public class Activity {
         this.registeredParticipants = registeredParticipants;
     }
 
-    public int getUuid() {
-        return uuid;
+    public int getarticleId() {
+        return articleId;
     }
 
-    public void setUuid(int uuid) {
-        this.uuid = uuid;
+    public void setarticleId(int articleId) {
+        this.articleId = articleId;
     }
 
     public String getTitle() {

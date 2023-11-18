@@ -3,7 +3,7 @@ package classes;
 import java.util.List;
 
 public class AcademicEvent {
-    private int uuid;
+    private int articleId;
     private String name;
     private String initDate;
     private String endDate;
@@ -14,10 +14,10 @@ public class AcademicEvent {
     private List<Integer> idsAcceptedArticles;
     private List<Activity> activities;
     private List<Participant> participants;
-    public AcademicEvent(int uuid, String name, String initDate, String endDate, String location, String theme,
+    public AcademicEvent(int articleId, String name, String initDate, String endDate, String location, String theme,
             String description, int areaDirectorId, List<Integer> idsAcceptedArticles, List<Activity> activities,
             List<Participant> participants) {
-        this.uuid = uuid;
+        this.articleId = articleId;
         this.name = name;
         this.initDate = initDate;
         this.endDate = endDate;
@@ -29,11 +29,11 @@ public class AcademicEvent {
         this.activities = activities;
         this.participants = participants;
     }
-    public int getUuid() {
-        return uuid;
+    public int getarticleId() {
+        return articleId;
     }
-    public void setUuid(int uuid) {
-        this.uuid = uuid;
+    public void setarticleId(int articleId) {
+        this.articleId = articleId;
     }
     public String getName() {
         return name;

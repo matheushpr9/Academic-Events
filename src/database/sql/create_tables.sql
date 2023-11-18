@@ -51,9 +51,9 @@ CREATE TABLE IF NOT EXISTS Article(
     processNumber VARCHAR(99),
     pdfFile VARCHAR(99),
     subAreaId INTEGER,
-    evaluation1Id VARCHAR(99),
-    evaluation2Id VARCHAR(99),
-    evaluation3Id VARCHAR(99),
+    evaluation1Id  INTEGER,
+    evaluation2Id INTEGER,
+    evaluation3Id INTEGER,
     FOREIGN KEY (subAreaId) REFERENCES Subarea(subAreaId)
 );
 CREATE TABLE IF NOT EXISTS Author_x_Article(

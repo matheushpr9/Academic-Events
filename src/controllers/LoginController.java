@@ -14,7 +14,7 @@ public class LoginController {
 
         String databasePassword = author.getPassword().toString();
 
-        if(password == databasePassword){
+        if(password.equals(databasePassword)){
             return true;
         }
         return false;

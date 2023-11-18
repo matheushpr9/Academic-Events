@@ -9,9 +9,9 @@ import controllers.LoginController;
 
 public class LoginView extends JFrame {
 
-    private JTextField campoDocumento;
-    //private JPasswordField campoSenha;
-    private JTextField campoSenha;
+    private JTextField documentField;
+    //private JPasswordField passwordField;
+    private JTextField passwordField;
 
     public LoginView() {
    
@@ -20,46 +20,53 @@ public class LoginView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); 
 
-        JPanel painel = new JPanel();
-        painel.setLayout(new GridLayout(3, 2, 10, 10));
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 2, 10, 10));
 
-        JLabel rotuloDocumento = new JLabel("Document:");
-        campoDocumento = new JTextField();
+        JLabel documentLabel = new JLabel("Document:");
+        documentField = new JTextField();
 
-        JLabel rotuloSenha = new JLabel("password:");
-        //campoSenha = new JPasswordField();
-        campoSenha = new JPasswordField();
+        JLabel passwordLabel = new JLabel("password:");
+        //passwordField = new JPasswordField();
+        passwordField = new JPasswordField();
 
-        JButton botaoLogin = new JButton("Login");
-        botaoLogin.addActionListener(new ActionListener() {
+        JButton loginButton = new JButton("Login");
+        loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                LoginController loginController = new LoginController();
-                String document = campoDocumento.getText().toString();
-                String password = campoSenha.getText().toString();
-                Boolean passwordIsRight = loginController.validateLogin(document , password);
+                try{
+                    LoginController loginController = new LoginController();
+                    String document = documentField.getText().toString();
+                    String password = passwordField.getText().toString();
+                    Boolean passwordIsRight = loginController.validateLogin(document , password);
 
-                if (passwordIsRight){
-                    System.out.println("The password is right!");
-                }else{
-                    System.out.println("The password is wrong!");
+                    if (passwordIsRight){
+                        JOptionPane.showMessageDialog(LoginView.this, "Welcome " + "a" + "!\n");
+                        setVisible(false);
+                        new AuthorHomePageView().setVisible(true);
+
+
+                    }else{
+                        JOptionPane.showMessageDialog(LoginView.this, "Document or password invalid!");
+                    }
+
+                }catch(Exception exc){
+                    JOptionPane.showMessageDialog(LoginView.this, "Document not found on system.");
+                    exc.printStackTrace();
                 }
-
+                
             }
         });
 
-        // Adiciona componentes ao painel
-        painel.add(rotuloDocumento);
-        painel.add(campoDocumento);
-        painel.add(rotuloSenha);
-        painel.add(campoSenha);
-        painel.add(new JLabel()); // Espaço em branco para alinhar corretamente
-        painel.add(botaoLogin);
+        panel.add(documentLabel);
+        panel.add(documentField);
+        panel.add(passwordLabel);
+        panel.add(passwordField);
+        panel.add(new JLabel()); 
+        panel.add(loginButton);
 
-        // Adiciona o painel à janela
-        add(painel);
+        add(panel);
 
-        // Torna a janela visível
         setVisible(true);
     }
 

@@ -1,7 +1,6 @@
 package classes.dao;
 
 import classes.users.Author;
-
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

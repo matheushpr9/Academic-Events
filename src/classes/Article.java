@@ -1,12 +1,9 @@
 package classes;
 
 import java.util.List;
-//import classes.Author;
-//import classes.evaluation;
-//import classes.SubArea;
 
-class Article {
-    private String uuid;
+public class Article {
+    private String articleId;
     private String title;
     private int authorsId;
     private String summary;
@@ -14,15 +11,14 @@ class Article {
     private boolean involveHumans;
     private String processNumber;
     private String pdfFile; 
-    private int subAreaId;
-    private Evaluation evaluation1;
-    private Evaluation evaluation2;
-    private Evaluation evaluation3; // can be null
+    private Integer subAreaId;
+    private Integer evaluation1Id;
+    private Integer evaluation2Id;
+    private Integer evaluation3Id; // can be null
     
-    public Article(String uuid, String title, int authorsId, String summary, List<String> keywords,
-            boolean involveHumans, String processNumber, String pdfFile, int subAreaId, Evaluation evaluation1,
-            Evaluation evaluation2, Evaluation evaluation3) {
-        this.uuid = uuid;
+    public Article(String articleId, String title, int authorsId, String summary, List<String> keywords,
+            boolean involveHumans, String processNumber, String pdfFile, int subAreaId) {
+        this.articleId = articleId;
         this.title = title;
         this.authorsId = authorsId;
         this.summary = summary;
@@ -31,17 +27,35 @@ class Article {
         this.processNumber = processNumber;
         this.pdfFile = pdfFile;
         this.subAreaId = subAreaId;
-        this.evaluation1 = evaluation1;
-        this.evaluation2 = evaluation2;
-        this.evaluation3 = evaluation3;
+        this.evaluation1Id = null;
+        this.evaluation2Id = null;
+        this.evaluation3Id = null;
     }
 
-    public String getUuid() {
-        return uuid;
+
+    public Article(String articleId, String title, int authorsId, String summary, List<String> keywords,
+            boolean involveHumans, String processNumber, String pdfFile, int subAreaId, int evaluation1Id, int evaluation2, int evaluation3){
+        this.articleId = articleId;
+        this.title = title;
+        this.authorsId = authorsId;
+        this.summary = summary;
+        this.keywords = keywords;
+        this.involveHumans = involveHumans;
+        this.processNumber = processNumber;
+        this.pdfFile = pdfFile;
+        this.subAreaId = subAreaId;
+        this.evaluation1Id = evaluation1Id;
+        this.evaluation2Id = evaluation2;
+        this.evaluation3Id = evaluation3;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+
+    public String getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
     }
 
     public String getTitle() {
@@ -108,28 +122,28 @@ class Article {
         this.subAreaId = subAreaId;
     }
 
-    public Evaluation getEvaluation1() {
-        return evaluation1;
+    public Integer getEvaluation1Id() {
+        return evaluation1Id;
     }
 
-    public void setEvaluation1(Evaluation evaluation1) {
-        this.evaluation1 = evaluation1;
+    public void setEvaluation1Id(Integer evaluation1Id) {
+        this.evaluation1Id = evaluation1Id;
     }
 
-    public Evaluation getEvaluation2() {
-        return evaluation2;
+    public Integer getEvaluation2Id() {
+        return evaluation2Id;
     }
 
-    public void setEvaluation2(Evaluation evaluation2) {
-        this.evaluation2 = evaluation2;
+    public void setEvaluation2Id(Integer evaluation2) {
+        this.evaluation2Id = evaluation2;
     }
 
-    public Evaluation getEvaluation3() {
-        return evaluation3;
+    public Integer getEvaluation3Id() {
+        return evaluation3Id;
     }
 
-    public void setEvaluation3(Evaluation evaluation3) {
-        this.evaluation3 = evaluation3;
+    public void setEvaluation3Id(Integer evaluation3) {
+        this.evaluation3Id = evaluation3;
     }
     
     
