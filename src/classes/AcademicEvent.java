@@ -3,21 +3,21 @@ package classes;
 import java.util.List;
 
 public class AcademicEvent {
-    private int articleId;
+    private int academicEventId;
     private String name;
     private String initDate;
     private String endDate;
     private String location;
     private String theme;
     private String description;
-    private int areaDirectorId;
+    private Integer areaDirectorId;
     private List<Integer> idsAcceptedArticles;
-    private List<Activity> activities;
-    private List<Participant> participants;
-    public AcademicEvent(int articleId, String name, String initDate, String endDate, String location, String theme,
-            String description, int areaDirectorId, List<Integer> idsAcceptedArticles, List<Activity> activities,
-            List<Participant> participants) {
-        this.articleId = articleId;
+    private List<Integer> activitiesId;
+    private List<Integer> participantsId;
+    public AcademicEvent(int academicEventId, String name, String initDate, String endDate, String location, String theme,
+            String description, int areaDirectorId, List<Integer> idsAcceptedArticles, List<Integer> activitiesId,
+            List<Integer> participantsId) {
+        this.academicEventId = academicEventId;
         this.name = name;
         this.initDate = initDate;
         this.endDate = endDate;
@@ -26,14 +26,14 @@ public class AcademicEvent {
         this.description = description;
         this.areaDirectorId = areaDirectorId;
         this.idsAcceptedArticles = idsAcceptedArticles;
-        this.activities = activities;
-        this.participants = participants;
+        this.activitiesId = activitiesId;
+        this.participantsId = participantsId;
     }
-    public int getarticleId() {
-        return articleId;
+    public int getAcademicEventId() {
+        return academicEventId;
     }
-    public void setarticleId(int articleId) {
-        this.articleId = articleId;
+    public void setAcademicEventId(int academicEventId) {
+        this.academicEventId = academicEventId;
     }
     public String getName() {
         return name;
@@ -83,17 +83,17 @@ public class AcademicEvent {
     public void setIdsAcceptedArticles(List<Integer> idsAcceptedArticles) {
         this.idsAcceptedArticles = idsAcceptedArticles;
     }
-    public List<Activity> getActivities() {
-        return activities;
+    public List<Integer> getActivitiesId() {
+        return activitiesId;
     }
-    public void setActivities(List<Activity> activities) {
-        this.activities = activities;
+    public void setActivitiesId(List<Integer> activitiesId) {
+        this.activitiesId = activitiesId;
     }
-    public List<Participant> getParticipants() {
-        return participants;
+    public List<Integer> getParticipantsId() {
+        return participantsId;
     }
-    public void setParticipants(List<Participant> participants) {
-        this.participants = participants;
+    public void setParticipantsId(List<Integer> participantsId) {
+        this.participantsId = participantsId;
     }
   
 }

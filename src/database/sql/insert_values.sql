@@ -25,3 +25,11 @@ SELECT * FROM Author;
 SELECT * FROM Revisor;    
 SELECT * FROM Area;
 SELECT * FROM Subarea;
+
+INSERT INTO AcademicEvent( name ,initDate ,endDate ,location ,theme ,description ,areaDirectorId, idsAcceptedArticles , activitiesId , participantsId)
+VALUES
+    ('Technology Week', '22/11/2023', '26/11/2023', 'IFSP - bra', 'Technology', 'Daily lectures on the lasted and most relevant topics in the world of technology!', NULL, NULL, NULL,NULL )
+;
+
+
+SELECT * FROM AcademicEvent;

@@ -31,7 +31,7 @@ public class ArticleDao implements Dao<Article>{
         
         try{
 
-            String selectSQL = "SELECT * FROM Author WHERE articleId = ?"; 
+            String selectSQL = "SELECT * FROM Article WHERE articleId = ?"; 
 
             PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
 
@@ -41,6 +41,7 @@ public class ArticleDao implements Dao<Article>{
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()) {
                 String id = rs.getString("articleId");
+                String eventId = rs.getString("eventId");
                 String title = rs.getString("title");
                 String authorsId = rs.getString("authorsId");
                 String summary = rs.getString("summary");
@@ -54,7 +55,7 @@ public class ArticleDao implements Dao<Article>{
                 String evaluation2Id = rs.getString("evaluation2Id");
                 String evaluation3Id = rs.getString("evaluation3Id");
                 
-                article = new Article(id, title, Integer.parseInt(authorsId), summary, keywordsList, Boolean.parseBoolean(involveHumans) , processNumber, pdfFile, Integer.parseInt(subAreaId),Integer.parseInt(evaluation1Id),Integer.parseInt(evaluation2Id),Integer.parseInt(evaluation3Id));
+                article = new Article(Integer.parseInt(id), Integer.parseInt(eventId), title, Integer.parseInt(authorsId), summary, keywordsList, Boolean.parseBoolean(involveHumans) , processNumber, pdfFile, Integer.parseInt(subAreaId),Integer.parseInt(evaluation1Id),Integer.parseInt(evaluation2Id),Integer.parseInt(evaluation3Id));
                 
             }
 
@@ -85,6 +86,7 @@ public class ArticleDao implements Dao<Article>{
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()) {
                 String articleId = rs.getString("articleId");
+                String eventId = rs.getString("eventId");
                 String title = rs.getString("title");
                 String authorsId = rs.getString("authorsId");
                 String summary = rs.getString("summary");
@@ -98,7 +100,7 @@ public class ArticleDao implements Dao<Article>{
                 String evaluation2Id = rs.getString("evaluation2Id");
                 String evaluation3Id = rs.getString("evaluation3Id");
                 
-                article = new Article(articleId, title, Integer.parseInt(authorsId), summary, keywordsList, Boolean.parseBoolean(involveHumans) , processNumber, pdfFile, Integer.parseInt(subAreaId),Integer.parseInt(evaluation1Id),Integer.parseInt(evaluation2Id),Integer.parseInt(evaluation3Id));
+                article = new Article(Integer.parseInt(articleId), Integer.parseInt(eventId) ,title, Integer.parseInt(authorsId), summary, keywordsList, Boolean.parseBoolean(involveHumans) , processNumber, pdfFile, Integer.parseInt(subAreaId),Integer.parseInt(evaluation1Id),Integer.parseInt(evaluation2Id),Integer.parseInt(evaluation3Id));
     
                 articles.add(article);
                 
@@ -116,7 +118,8 @@ public class ArticleDao implements Dao<Article>{
 
     @Override
     public void save(Article article){
-        String articleId = article.getArticleId();
+        Integer articleId = article.getArticleId();
+        Integer eventId = article.getEventId();
         String title = article.getTitle();
         int authorsId = article.getAuthorsId();
         String summary = article.getSummary();
@@ -132,7 +135,7 @@ public class ArticleDao implements Dao<Article>{
         try{
             Statement statement = con.createStatement();
             statement.setQueryTimeout(30);
-            statement.executeUpdate("INSERT INTO Article VALUES ("+ articleId +", "+title+", "+ authorsId +", "+ summary +", "+ keywords+", "+ Boolean.toString(involveHumans)+", "+ processNumber+", "+ pdfFile+", "+ subAreaId.toString()+", "+ evaluation1Id+", "+ evaluation2Id+", "+ evaluation3Id + ")");
+            statement.executeUpdate("INSERT INTO Article VALUES ("+ articleId.toString() +", " + eventId +", " +title+", "+ authorsId +", "+ summary +", "+ keywords+", "+ Boolean.toString(involveHumans)+", "+ processNumber+", "+ pdfFile+", "+ subAreaId.toString()+", "+ evaluation1Id+", "+ evaluation2Id+", "+ evaluation3Id + ")");
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -145,6 +148,7 @@ public class ArticleDao implements Dao<Article>{
 
         Article updatedArticle = this.get(articleId).stream().findFirst().get();
 
+        Integer eventId = map.get("eventId") !=null ? Integer.parseInt(map.get("eventId")) : updatedArticle.getEventId();
         String title = map.get("title") !=null ? map.get("title") : updatedArticle.getTitle();
         int authorsId = map.get("authorsId") !=null ? Integer.parseInt(map.get("authorsId")) : updatedArticle.getAuthorsId();
         String summary = map.get("summary") !=null ? map.get("summary") : updatedArticle.getSummary();
@@ -161,7 +165,7 @@ public class ArticleDao implements Dao<Article>{
         try{
             Statement statement = con.createStatement();
             statement.setQueryTimeout(30);
-            statement.executeUpdate("UPDATE Article SET articleId = "+ articleId +", title = "+title+", authorsId = "+ authorsId +", summary = "+ summary +", keywords = "+ keywords+", involveHumans = "+ Boolean.toString(involveHumans)+", processNumber = "+ processNumber+", pdfFile = "+ pdfFile+", subAreaId = "+ subAreaId.toString()+", evaluation1Id = "+ evaluation1Id+", evaluation2Id = "+ evaluation2Id+", evaluation3Id = "+ evaluation3Id);
+            statement.executeUpdate("UPDATE Article SET articleId = "+ articleId +", eventId = "+eventId +", title = "+title+", authorsId = "+ authorsId +", summary = "+ summary +", keywords = "+ keywords+", involveHumans = "+ Boolean.toString(involveHumans)+", processNumber = "+ processNumber+", pdfFile = "+ pdfFile+", subAreaId = "+ subAreaId.toString()+", evaluation1Id = "+ evaluation1Id+", evaluation2Id = "+ evaluation2Id+", evaluation3Id = "+ evaluation3Id + " WHERE articleId = " + articleId + " WHERE articleId = "+articleId);
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -172,12 +176,12 @@ public class ArticleDao implements Dao<Article>{
     @Override
     public void delete(Article article){
         
-        String articleId = article.getArticleId();
+        Integer articleId = article.getArticleId();
         
         try{
             Statement statement = con.createStatement();
             statement.setQueryTimeout(30);
-            statement.executeUpdate("DELETE FROM Article WHERE articleId = " + articleId);
+            statement.executeUpdate("DELETE FROM Article WHERE articleId = " + articleId.toString());
            
          
         }catch(SQLException e){

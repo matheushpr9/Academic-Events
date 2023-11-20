@@ -16,7 +16,7 @@ public class AuthorHomePageView extends JFrame {
     public AuthorHomePageView() {
         
         setTitle("Homepage");
-        setSize(600, 400);
+        setSize(800, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         newArticleButton = new JButton("Create new Article");

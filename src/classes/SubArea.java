@@ -1,21 +1,21 @@
 package classes;
 
 public class SubArea {
-    private int id;
+    private Integer id;
     private String title;
-    private int areaId;
+    private Integer areaId;
 
-    public SubArea(int id, String title, int areaId) {
+    public SubArea(Integer id, String title, Integer areaId) {
         this.id = id;
         this.title = title;
         this.areaId = areaId;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -27,11 +27,11 @@ public class SubArea {
         this.title = title;
     }
 
-    public int getAreaId() {
+    public Integer getAreaId() {
         return areaId;
     }
 
-    public void setAreaId(int areaId) {
+    public void setAreaId(Integer areaId) {
         this.areaId = areaId;
     }
 

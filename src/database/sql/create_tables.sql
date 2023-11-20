@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS Revisor;
 DROP TABLE IF EXISTS Article;
 DROP TABLE IF EXISTS Author_x_Article;
 DROP TABLE IF EXISTS Evaluation;
+DROP TABLE IF EXISTS AcademicEvent;
 
 
 CREATE TABLE IF NOT EXISTS Author(
@@ -42,8 +43,24 @@ CREATE TABLE IF NOT EXISTS Revisor_x_Area(
     FOREIGN KEY (revisorId) REFERENCES Revisor(revisorId),
     FOREIGN KEY (areaId) REFERENCES Area(areaId)
 );
+
+CREATE TABLE IF NOT EXISTS AcademicEvent(
+    academicEventId INTEGER NOT NULL PRIMARY KEY,
+    name VARCHAR(99),
+    initDate VARCHAR(10),
+    endDate VARCHAR(10),
+    location VARCHAR(99),
+    theme VARCHAR(99),
+    description VARCHAR(99),
+    areaDirectorId INTEGER,
+    idsAcceptedArticles VARCHAR(99),
+    activitiesId VARCHAR(99),
+    participantsId VARCHAR(999)
+    );
+
 CREATE TABLE IF NOT EXISTS Article(
     articleId INTEGER NOT NULL PRIMARY KEY,
+    academicEventId INTEGER NOT NULL,
     title VARCHAR(99),
     summary VARCHAR(99),
     keyword VARCHAR(99),
@@ -54,6 +71,7 @@ CREATE TABLE IF NOT EXISTS Article(
     evaluation1Id  INTEGER,
     evaluation2Id INTEGER,
     evaluation3Id INTEGER,
+    FOREIGN KEY (academicEventId) REFERENCES AcademicEvent(academicEventId)
     FOREIGN KEY (subAreaId) REFERENCES Subarea(subAreaId)
 );
 CREATE TABLE IF NOT EXISTS Author_x_Article(

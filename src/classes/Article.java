@@ -3,9 +3,10 @@ package classes;
 import java.util.List;
 
 public class Article {
-    private String articleId;
+    private Integer articleId;
+    private Integer eventId;
     private String title;
-    private int authorsId;
+    private Integer authorsId;
     private String summary;
     private List<String> keywords;
     private boolean involveHumans;
@@ -16,9 +17,26 @@ public class Article {
     private Integer evaluation2Id;
     private Integer evaluation3Id; // can be null
     
-    public Article(String articleId, String title, int authorsId, String summary, List<String> keywords,
+    public Article(Integer articleId, Integer eventId, String title, String summary, List<String> keywords, boolean involveHumans, String processNumber, String pdfFile, Integer subAreaId){
+        this.articleId = articleId;
+        this.eventId = eventId;
+        this.title = title;
+        this.authorsId = null;
+        this.summary = summary;
+        this.keywords = keywords;
+        this.involveHumans = involveHumans;
+        this.processNumber = processNumber;
+        this.pdfFile = pdfFile;
+        this.subAreaId = subAreaId;
+        this.evaluation1Id = null;
+        this.evaluation2Id = null;
+        this.evaluation3Id = null;
+    }
+
+    public Article(Integer articleId, Integer eventId, String title, int authorsId, String summary, List<String> keywords,
             boolean involveHumans, String processNumber, String pdfFile, int subAreaId) {
         this.articleId = articleId;
+        this.eventId = eventId;
         this.title = title;
         this.authorsId = authorsId;
         this.summary = summary;
@@ -33,9 +51,10 @@ public class Article {
     }
 
 
-    public Article(String articleId, String title, int authorsId, String summary, List<String> keywords,
+    public Article(Integer articleId, Integer eventId, String title, int authorsId, String summary, List<String> keywords,
             boolean involveHumans, String processNumber, String pdfFile, int subAreaId, int evaluation1Id, int evaluation2, int evaluation3){
         this.articleId = articleId;
+        this.eventId = eventId;
         this.title = title;
         this.authorsId = authorsId;
         this.summary = summary;
@@ -50,13 +69,22 @@ public class Article {
     }
 
 
-    public String getArticleId() {
+    public Integer getArticleId() {
         return articleId;
     }
 
-    public void setArticleId(String articleId) {
+    public void setArticleId(Integer articleId) {
         this.articleId = articleId;
     }
+
+    public Integer getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(Integer eventId) {
+        this.eventId = eventId;
+    }
+
 
     public String getTitle() {
         return title;
