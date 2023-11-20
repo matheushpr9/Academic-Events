@@ -47,7 +47,7 @@ public class LoginView extends JFrame {
 
 
                     }else{
-                        JOptionPane.showMessageDialog(LoginView.this, "Document or password invalid!");
+                        JOptionPane.showMessageDialog(LoginView.this, "Password invalid!");
                     }
 
                 }catch(Exception exc){

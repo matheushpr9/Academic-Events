@@ -76,8 +76,8 @@ public class CreateNewArticleView extends JFrame {
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica para fechar a janela
-                dispose();
+                setVisible(false);
+                new AuthorHomePageView().setVisible(true);
             }
         });
 

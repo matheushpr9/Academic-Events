@@ -23,8 +23,8 @@ public class AuthorHomePageView extends JFrame {
         newArticleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica para criar um novo artigo
-                JOptionPane.showMessageDialog(AuthorHomePageView.this, "Lógica para criar um novo artigo aqui.");
+                setVisible(false);
+                new CreateNewArticleView().setVisible(true);
             }
         });
 
