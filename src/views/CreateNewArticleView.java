@@ -2,6 +2,7 @@ package views;
 
 import javax.swing.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 import java.awt.*;
@@ -18,6 +19,7 @@ public class CreateNewArticleView extends JFrame {
     private JComboBox<String> subareasDropBox;
     private JTextField keywordsText;
     private JComboBox<String> involveHumansDropBox;
+    private JTextField processNumberText;
     private JTextField titleText;
     private JTextArea summaryText;
     private JButton uploadPdfButton;
@@ -40,24 +42,25 @@ public class CreateNewArticleView extends JFrame {
         themeText = new JTextField(20);
         keywordsText = new JTextField(20);
 
-        String[] opcoesPesquisa = {"Sim", "Não"};
-        involveHumansDropBox = new JComboBox<>(opcoesPesquisa);
+        String[] searchOptions = {"Sim", "Não"};
+        involveHumansDropBox = new JComboBox<>(searchOptions);
 
         titleText = new JTextField(20);
+        processNumberText = new JTextField(20);
         summaryText = new JTextArea(5, 20);
         JScrollPane scrollPane = new JScrollPane(summaryText);
 
         uploadPdfButton = new JButton("Upload PDF");
         filePathTxt = new JTextField(20);
-        filePathTxt.setEditable(false); // Para evitar a edição manual
+        filePathTxt.setEditable(false);
 
-        JButton btnCancelar = new JButton("Cancelar");
-        JButton btnProximo = new JButton("Próximo");
+        JButton cancelButton = new JButton("Cancel");
+        JButton nextButton = new JButton("Next");
 
         uploadPdfButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica para fazer o upload do PDF
+                
                 JFileChooser fileChooser = new JFileChooser();
                 int result = fileChooser.showOpenDialog(CreateNewArticleView.this);
 
@@ -65,15 +68,13 @@ public class CreateNewArticleView extends JFrame {
                     File selectedFile = fileChooser.getSelectedFile();
                     String filePath = selectedFile.getAbsolutePath();
                     filePathTxt.setText(filePath);
-                    JOptionPane.showMessageDialog(CreateNewArticleView.this, "Arquivo selecionado: " + selectedFile.getName());
+                    JOptionPane.showMessageDialog(CreateNewArticleView.this, "Selected file:" + selectedFile.getName());
                     
-                    // Aqui você pode adicionar a lógica para lidar com o arquivo PDF selecionado
-                    // Por exemplo, você pode armazenar o caminho do arquivo, fazer o upload para um servidor, etc.
                 }
             }
         });
 
-        btnCancelar.addActionListener(new ActionListener() {
+        cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
@@ -81,43 +82,76 @@ public class CreateNewArticleView extends JFrame {
             }
         });
 
-        btnProximo.addActionListener(new ActionListener() {
+        nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica para ação do botão "Próximo"
-                JOptionPane.showMessageDialog(CreateNewArticleView.this, "Ação do botão Próximo aqui.");
+
+                String eventsString = eventsDropBox.getSelectedItem().toString();
+
+                String[] eventId_x_eventName = eventsString.split(" - ");
+
+                System.out.println(eventId_x_eventName[0]);
+
+                Integer eventId = Integer.parseInt(eventId_x_eventName[0]);
+
+                System.out.println(eventId);
+                
+                String title = titleText.getText();
+
+                String summary = summaryText.getText();
+
+                String keywordsString = keywordsText.getText();
+
+
+                String  involveHumansString = involveHumansDropBox.getSelectedItem().toString(); 
+
+                Boolean involveHumans =involveHumansString == "Sim" ? true:false;
+
+                String processNumber = processNumberText.getText();
+
+                String filePath = filePathTxt.getText();
+
+                String subAreaString = subareasDropBox.getSelectedItem().toString();
+
+                String[] id_x_name =  subAreaString.split(" - ");
+
+                Integer subareaId = Integer.parseInt(id_x_name[0]);
+
+                List<String> keywordsList = Arrays.asList(keywordsString.split(","));
+                CreateNewArticleController.sendFirstForm(eventId, title, null,summary, keywordsList,involveHumans,processNumber, filePath, subareaId);
+                setVisible(false);
+                new CreateNewArticleViewPart2().setVisible(true);
             }
         });
 
         // Layout
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(11, 2));
-        panel.add(new JLabel("Evento:"));
+        panel.setLayout(new GridLayout(12, 2));
+        panel.add(new JLabel("Event:"));
         panel.add(eventsDropBox);
-        panel.add(new JLabel("Tema:"));
+        panel.add(new JLabel("Theme:"));
         panel.add(themeText);
-        panel.add(new JLabel("Subárea:"));  // Adicionando a label para a subárea
+        panel.add(new JLabel("Subarea:"));
         panel.add(subareasDropBox);
-        panel.add(new JLabel("Palavras-Chave:"));
+        panel.add(new JLabel("keywords:"));
         panel.add(keywordsText);
-        panel.add(new JLabel("Pesquisa envolve humanos?"));
+        panel.add(new JLabel("Does research involve humans?"));
         panel.add(involveHumansDropBox);
-        panel.add(new JLabel("Título do Evento:"));
+        panel.add(new JLabel("Process number :"));
+        panel.add(processNumberText);
+        panel.add(new JLabel("Article title:"));
         panel.add(titleText);
-        panel.add(new JLabel("Resumo:"));
+        panel.add(new JLabel("Summary:"));
         panel.add(scrollPane);
         panel.add(new JLabel(""));
         panel.add(uploadPdfButton);
-        panel.add(new JLabel("Caminho do Arquivo:"));
+        panel.add(new JLabel("File path:"));
         panel.add(filePathTxt);   
-        panel.add(btnCancelar);
-        panel.add(btnProximo);
-        
+        panel.add(cancelButton);
+        panel.add(nextButton);
 
-        // Adiciona o painel ao JFrame
         add(panel);
 
-        // Exibição da tela
         setVisible(true);
     }
 

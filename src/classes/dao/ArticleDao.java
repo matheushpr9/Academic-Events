@@ -43,7 +43,8 @@ public class ArticleDao implements Dao<Article>{
                 String id = rs.getString("articleId");
                 String eventId = rs.getString("eventId");
                 String title = rs.getString("title");
-                String authorsId = rs.getString("authorsId");
+                String[] authorsId = rs.getString("authorsId").split(",");
+                int[] authorsIdArray = Arrays.stream(authorsId).mapToInt(Integer::parseInt).toArray();
                 String summary = rs.getString("summary");
                 String keywords = rs.getString("keywords");
                 List<String> keywordsList = new ArrayList<String>(Arrays.asList(keywords.split(",")));
@@ -55,7 +56,7 @@ public class ArticleDao implements Dao<Article>{
                 String evaluation2Id = rs.getString("evaluation2Id");
                 String evaluation3Id = rs.getString("evaluation3Id");
                 
-                article = new Article(Integer.parseInt(id), Integer.parseInt(eventId), title, Integer.parseInt(authorsId), summary, keywordsList, Boolean.parseBoolean(involveHumans) , processNumber, pdfFile, Integer.parseInt(subAreaId),Integer.parseInt(evaluation1Id),Integer.parseInt(evaluation2Id),Integer.parseInt(evaluation3Id));
+                article = new Article(Integer.parseInt(id), Integer.parseInt(eventId), title, Arrays.stream(authorsIdArray).boxed().toArray(Integer[]::new), summary, keywordsList, Boolean.parseBoolean(involveHumans) , processNumber, pdfFile, Integer.parseInt(subAreaId),Integer.parseInt(evaluation1Id),Integer.parseInt(evaluation2Id),Integer.parseInt(evaluation3Id));
                 
             }
 
@@ -88,7 +89,8 @@ public class ArticleDao implements Dao<Article>{
                 String articleId = rs.getString("articleId");
                 String eventId = rs.getString("eventId");
                 String title = rs.getString("title");
-                String authorsId = rs.getString("authorsId");
+                String[] authorsId = rs.getString("authorsId").split(",");
+                int[] authorsIdArray = Arrays.stream(authorsId).mapToInt(Integer::parseInt).toArray();
                 String summary = rs.getString("summary");
                 String keywords = rs.getString("keywords");
                 List<String> keywordsList = new ArrayList<String>(Arrays.asList(keywords.split(",")));
@@ -100,7 +102,7 @@ public class ArticleDao implements Dao<Article>{
                 String evaluation2Id = rs.getString("evaluation2Id");
                 String evaluation3Id = rs.getString("evaluation3Id");
                 
-                article = new Article(Integer.parseInt(articleId), Integer.parseInt(eventId) ,title, Integer.parseInt(authorsId), summary, keywordsList, Boolean.parseBoolean(involveHumans) , processNumber, pdfFile, Integer.parseInt(subAreaId),Integer.parseInt(evaluation1Id),Integer.parseInt(evaluation2Id),Integer.parseInt(evaluation3Id));
+                article = new Article(Integer.parseInt(articleId), Integer.parseInt(eventId) ,title, Arrays.stream(authorsIdArray).boxed().toArray(Integer[]::new), summary, keywordsList, Boolean.parseBoolean(involveHumans) , processNumber, pdfFile, Integer.parseInt(subAreaId),Integer.parseInt(evaluation1Id),Integer.parseInt(evaluation2Id),Integer.parseInt(evaluation3Id));
     
                 articles.add(article);
                 
@@ -121,10 +123,12 @@ public class ArticleDao implements Dao<Article>{
         Integer articleId = article.getArticleId();
         Integer eventId = article.getEventId();
         String title = article.getTitle();
-        int authorsId = article.getAuthorsId();
+        Integer[] authorsId = article.getAuthorsId();
+        String authorsIdString = authorsId != null ? authorsId.toString(): null;
         String summary = article.getSummary();
         List<String> keywords = article.getKeywords();
-        boolean involveHumans = article.isInvolveHumans();
+        Boolean involveHumansBool = article.isInvolveHumans();
+        Integer involveHumans = involveHumansBool.toString()=="true"?1:0;
         String processNumber = article.getProcessNumber();
         String pdfFile = article.getPdfFile(); 
         Integer subAreaId = article.getSubAreaId();
@@ -135,7 +139,7 @@ public class ArticleDao implements Dao<Article>{
         try{
             Statement statement = con.createStatement();
             statement.setQueryTimeout(30);
-            statement.executeUpdate("INSERT INTO Article VALUES ("+ articleId.toString() +", " + eventId +", " +title+", "+ authorsId +", "+ summary +", "+ keywords+", "+ Boolean.toString(involveHumans)+", "+ processNumber+", "+ pdfFile+", "+ subAreaId.toString()+", "+ evaluation1Id+", "+ evaluation2Id+", "+ evaluation3Id + ")");
+            statement.executeUpdate("INSERT INTO Article VALUES ("+ articleId +"," + eventId +",'" +title+"','"+ authorsIdString +"','"+ summary +"','"+ keywords.toString()+"',"+ involveHumans.toString() +",'"+ processNumber+"','"+ pdfFile+"',"+ subAreaId.toString()+","+ evaluation1Id+","+ evaluation2Id+","+ evaluation3Id + ")");
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -150,7 +154,9 @@ public class ArticleDao implements Dao<Article>{
 
         Integer eventId = map.get("eventId") !=null ? Integer.parseInt(map.get("eventId")) : updatedArticle.getEventId();
         String title = map.get("title") !=null ? map.get("title") : updatedArticle.getTitle();
-        int authorsId = map.get("authorsId") !=null ? Integer.parseInt(map.get("authorsId")) : updatedArticle.getAuthorsId();
+        String [] authorsIdStrings = map.get("authorsId").split(",");
+        int[] authorsIdArray = Arrays.stream(authorsIdStrings).mapToInt(Integer::parseInt).toArray();
+        Integer[] authorsId = map.get("authorsId") !=null ? Arrays.stream(authorsIdArray).boxed().toArray(Integer[]::new) : updatedArticle.getAuthorsId();
         String summary = map.get("summary") !=null ? map.get("summary") : updatedArticle.getSummary();
         List<String> keywords = map.get("keywords") !=null ? new ArrayList<String>(Arrays.asList(map.get("keywords").split(",")))  : updatedArticle.getKeywords();
         boolean involveHumans = map.get("involveHumans") !=null ? Boolean.parseBoolean(map.get("involveHumans")) : updatedArticle.isInvolveHumans();
@@ -165,7 +171,7 @@ public class ArticleDao implements Dao<Article>{
         try{
             Statement statement = con.createStatement();
             statement.setQueryTimeout(30);
-            statement.executeUpdate("UPDATE Article SET articleId = "+ articleId +", eventId = "+eventId +", title = "+title+", authorsId = "+ authorsId +", summary = "+ summary +", keywords = "+ keywords+", involveHumans = "+ Boolean.toString(involveHumans)+", processNumber = "+ processNumber+", pdfFile = "+ pdfFile+", subAreaId = "+ subAreaId.toString()+", evaluation1Id = "+ evaluation1Id+", evaluation2Id = "+ evaluation2Id+", evaluation3Id = "+ evaluation3Id + " WHERE articleId = " + articleId + " WHERE articleId = "+articleId);
+            statement.executeUpdate("UPDATE Article SET articleId = "+ articleId +", eventId = "+eventId +", title = "+title+", authorsId = "+ authorsId.toString() +", summary = "+ summary +", keywords = "+ keywords+", involveHumans = "+ Boolean.toString(involveHumans)+", processNumber = "+ processNumber+", pdfFile = "+ pdfFile+", subAreaId = "+ subAreaId.toString()+", evaluation1Id = "+ evaluation1Id+", evaluation2Id = "+ evaluation2Id+", evaluation3Id = "+ evaluation3Id + " WHERE articleId = " + articleId + " WHERE articleId = "+articleId);
         }catch(SQLException e){
             e.printStackTrace();
         }

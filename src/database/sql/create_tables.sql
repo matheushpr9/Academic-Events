@@ -59,9 +59,10 @@ CREATE TABLE IF NOT EXISTS AcademicEvent(
     );
 
 CREATE TABLE IF NOT EXISTS Article(
-    articleId INTEGER NOT NULL PRIMARY KEY,
+    articleId INTEGER PRIMARY KEY,
     academicEventId INTEGER NOT NULL,
     title VARCHAR(99),
+    authorsId VARCHAR(99),
     summary VARCHAR(99),
     keyword VARCHAR(99),
     involveHumans BOOLEAN,

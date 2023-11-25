@@ -62,8 +62,8 @@ public class AuthorDao implements Dao<Author>{
                 String email = rs.getString("email");
                 String password = rs.getString("password");
                 String phone = rs.getString("phone");
-                String document = rs.getString("document");
-                author  = new Author(document, name, email, password, phone);
+                String document = rs.getString("authorDocument");
+                author  = new Author(name, email, password, phone, document);
                 authors.add(author);
             }
         }catch(SQLException e){
@@ -76,7 +76,7 @@ public class AuthorDao implements Dao<Author>{
     @Override
     //public void save(String document, String name, String email, String password, String phone ){
     public void save(Author author){
-        String document = author.getDocument();
+        String document = author.getAuthorDocument();
         String name = author.getName();
         String email = author.getEmail();
         String password = author.getPassword();
@@ -121,7 +121,7 @@ public class AuthorDao implements Dao<Author>{
     @Override
     public void delete(Author author){
 
-        String authorDocument = author.getDocument();
+        String authorDocument = author.getAuthorDocument();
 
         try{
             Statement statement = con.createStatement();

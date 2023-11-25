@@ -2,12 +2,12 @@ package classes.users;
 
 public class Author extends BaseUser{
     private String phone;
-    private String document;
+    private String authorDocument;
     
-    public Author(String name, String email, String password, String phone, String document) {
+    public Author(String name, String email, String password, String phone, String authorDocument) {
         super(name, email, password);
         this.phone = phone;
-        this.document = document;
+        this.authorDocument = authorDocument;
     }
 
     public String getPhone() {
@@ -18,12 +18,12 @@ public class Author extends BaseUser{
         this.phone = phone;
     }
 
-    public String getDocument() {
-        return document;
+    public String getAuthorDocument() {
+        return authorDocument;
     }
 
-    public void setDocument(String document) {
-        this.document = document;
+    public void setAuthorDocument(String authorDocument) {
+        this.authorDocument = authorDocument;
     }
     
 }

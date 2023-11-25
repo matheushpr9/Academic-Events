@@ -7,6 +7,8 @@ import classes.Article;
 import classes.SubArea;
 import classes.dao.ArticleDao;
 import classes.dao.SubAreaDao;
+import classes.users.Author;
+import classes.dao.AuthorDao;
 
 public class CreateNewArticleController {
 
@@ -56,10 +58,33 @@ public class CreateNewArticleController {
 
     }
 
-    public void sendFirstForm(Integer articleId, Integer eventId, String title, String summary, List<String> keywords, boolean involveHumans, String processNumber, String pdfFile, Integer subAreaId){
-        Article article = new Article( articleId,  eventId,  title, summary, keywords, involveHumans, processNumber, pdfFile, subAreaId);
+    public static void sendFirstForm( Integer eventId, String title, Integer[] authorsId,String summary, List<String> keywords, boolean involveHumans, String processNumber, String pdfFile, Integer subAreaId){
+        Article article = new Article(  eventId,  title, authorsId, summary, keywords, involveHumans, processNumber, pdfFile, subAreaId);
         ArticleDao articleDao = new ArticleDao();
         articleDao.save(article);
+    }
+
+    public static List<Author> listAllAuthors(){
+        AuthorDao authorDao = new AuthorDao();
+        return authorDao.getAll();
+    }
+
+    public static List<String> listAllAuthorsToDropDown(){
+        
+        List<Author> authors = listAllAuthors();
+
+        List<String> listedAuthorsToDropdown = new ArrayList<String>();
+
+        for(int i=0; i<authors.size(); i++){
+            Author author = authors.get(i); 
+            String authorName = author.getName();
+            String authorDocument = author.getAuthorDocument();
+
+            listedAuthorsToDropdown.add(authorName + " - " +authorDocument);
+        }
+
+        return listedAuthorsToDropdown;
+
     }
      
 }
