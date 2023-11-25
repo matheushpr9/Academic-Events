@@ -1,14 +1,15 @@
 package controllers;
 import java.util.ArrayList;
 import java.util.List;
-import classes.AcademicEvent;
-import classes.dao.AcademicEventDao;
-import classes.Article;
-import classes.SubArea;
-import classes.dao.ArticleDao;
-import classes.dao.SubAreaDao;
-import classes.users.Author;
-import classes.dao.AuthorDao;
+
+import models.classes.AcademicEvent;
+import models.classes.Article;
+import models.classes.SubArea;
+import models.dao.AcademicEventDao;
+import models.dao.ArticleDao;
+import models.dao.AuthorDao;
+import models.dao.SubAreaDao;
+import models.users.Author;
 
 public class CreateNewArticleController {
 

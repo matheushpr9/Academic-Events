@@ -1,8 +1,7 @@
 package controllers;
 
-import classes.users.Author;
-
-import classes.dao.AuthorDao;
+import models.dao.AuthorDao;
+import models.users.Author;
 
 public class LoginController {
 

@@ -1,8 +1,9 @@
 package controllers;
 
 import java.util.List;
-import classes.Article;
-import classes.dao.ArticleDao;
+
+import models.classes.Article;
+import models.dao.ArticleDao;
 
 public class AuthorHomePageController {
 
