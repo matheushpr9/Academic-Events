@@ -1,7 +1,8 @@
 INSERT INTO Author ( authorDocument ,name , email, password, phone )
 VALUES
     ('111.111.111-11', 'Thiago Camposs', 'thithi@proton.com', 'qp4!V7Ak@S3*tTfvnTrYyPMZCM%2JY3', '(XX)XXXXXXXXX'),
-    ('222.222.222-22', 'Pedro Dalge Rossini', 'pedroDR@gmail.com', '#E5#rcNksJJ$eX4!jvTrYEVNu*2E6zk', '(XX)XXXXXXXXX')
+    ('222.222.222-22', 'Pedro Dalge Rossini', 'pedroDR@gmail.com', '#E5#rcNksJJ$eX4!jvTrYEVNu*2E6zk', '(XX)XXXXXXXXX'),
+    ('1', 'test', 'test@gmail.com', '1', '(XX)XXXXX-XXXX')
 ;
 INSERT INTO Revisor ( name ,email ,password ,phone ,document ,lattes ,workingInstitution ,researchId )
 VALUES
