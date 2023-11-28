@@ -16,12 +16,11 @@ CREATE TABLE IF NOT EXISTS Author(
     phone VARCHAR(99)
 );
 CREATE TABLE IF NOT EXISTS Revisor(
-    revisorId INTEGER NOT NULL PRIMARY KEY,
     name VARCHAR(99),
     email VARCHAR(99),
     password VARCHAR(99),
     phone VARCHAR(99),
-    document VARCHAR(99),
+    document VARCHAR(99) PRIMARY KEY,
     lattes VARCHAR(99),
     workingInstitution VARCHAR(99),
     researchId VARCHAR(99)

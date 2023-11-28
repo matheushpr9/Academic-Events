@@ -6,19 +6,21 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
     
-    private static Connection con = null;
-    static
-    {
-        String url = "jdbc:sqlite:src/database/academic_events.db";
-        try{
+    private static final String URL = "jdbc:sqlite:src/database/academic_events.db";
+    private static Connection instance = null;
+
+    private DatabaseConnection() {
+        try {
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection(url);
-        }
-        catch (ClassNotFoundException | SQLException e){
+            instance = DriverManager.getConnection(URL);
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
-    public static Connection getConnection(){
-        return con;
+    public static Connection getConnection() {
+        if (instance == null) {
+            new DatabaseConnection();
+        }
+        return instance;
     }
 }

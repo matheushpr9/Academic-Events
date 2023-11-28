@@ -6,7 +6,7 @@ public class Article {
     private Integer articleId;
     private Integer eventId;
     private String title;
-    private Integer[] authorsId;
+    private String[] authorsId;
     private String summary;
     private List<String> keywords;
     private boolean involveHumans;
@@ -17,7 +17,7 @@ public class Article {
     private Integer evaluation2Id;
     private Integer evaluation3Id; // can be null
     
-    public Article( Integer eventId, String title,Integer[] authorsId, String summary, List<String> keywords, boolean involveHumans, String processNumber, String pdfFile, Integer subAreaId){
+    public Article( Integer eventId, String title,String[] authorsId, String summary, List<String> keywords, boolean involveHumans, String processNumber, String pdfFile, Integer subAreaId){
         
         this.eventId = eventId;
         this.title = title;
@@ -33,7 +33,7 @@ public class Article {
         this.evaluation3Id = null;
     }
 
-    public Article(Integer articleId, Integer eventId, String title, Integer[] authorsId, String summary, List<String> keywords,
+    public Article(Integer articleId, Integer eventId, String title, String[] authorsId, String summary, List<String> keywords,
             boolean involveHumans, String processNumber, String pdfFile, int subAreaId) {
         this.articleId = articleId;
         this.eventId = eventId;
@@ -51,7 +51,7 @@ public class Article {
     }
 
 
-    public Article(Integer articleId, Integer eventId, String title, Integer[] authorsId, String summary, List<String> keywords,
+    public Article(Integer articleId, Integer eventId, String title, String[] authorsId, String summary, List<String> keywords,
             boolean involveHumans, String processNumber, String pdfFile, int subAreaId, int evaluation1Id, int evaluation2, int evaluation3){
         this.articleId = articleId;
         this.eventId = eventId;
@@ -94,11 +94,11 @@ public class Article {
         this.title = title;
     }
 
-    public Integer[] getAuthorsId() {
+    public String[] getAuthorsId() {
         return authorsId;
     }
 
-    public void setAuthorsId(Integer[] authorsId) {
+    public void setAuthorsId(String[] authorsId) {
         this.authorsId = authorsId;
     }
 

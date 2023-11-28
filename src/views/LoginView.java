@@ -38,13 +38,21 @@ public class LoginView extends JFrame {
                     LoginController loginController = new LoginController();
                     String document = documentField.getText().toString();
                     String password = passwordField.getText().toString();
-                    Boolean passwordIsRight = loginController.validateLogin(document , password);
+                    
+                    Boolean passwordAuthorIsRight = loginController.validateLoginAuthor(document , password);
 
-                    if (passwordIsRight){
-                        JOptionPane.showMessageDialog(LoginView.this, "Welcome " + "a" + "!\n");
+                    Boolean passWordRevisorIsRight = loginController.validateLoginRevisor(document, password);
+
+                    if (passwordAuthorIsRight){
+                        JOptionPane.showMessageDialog(LoginView.this, "Welcome " + "" + "!\n");
                         setVisible(false);
                         new AuthorHomePageView().setVisible(true);
 
+
+                    }else if(passWordRevisorIsRight){
+                        JOptionPane.showMessageDialog(LoginView.this, "Welcome " + "" + "!\n");
+                        setVisible(false);
+                        new RevisorHomePageView().setVisible(true);
 
                     }else{
                         JOptionPane.showMessageDialog(LoginView.this, "Password invalid!");

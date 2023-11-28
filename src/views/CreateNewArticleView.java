@@ -120,7 +120,7 @@ public class CreateNewArticleView extends JFrame {
                 List<String> keywordsList = Arrays.asList(keywordsString.split(","));
                 CreateNewArticleController.sendFirstForm(eventId, title, null,summary, keywordsList,involveHumans,processNumber, filePath, subareaId);
                 setVisible(false);
-                new CreateNewArticleViewPart2().setVisible(true);
+                new CreateNewArticleViewPart2(null).setVisible(true);
             }
         });
 

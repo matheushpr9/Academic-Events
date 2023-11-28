@@ -14,7 +14,7 @@ public class CreateNewArticleViewPart2 extends JFrame {
     private JButton addButton;
     private JButton createArticleButton;
 
-    public CreateNewArticleViewPart2() {
+    public CreateNewArticleViewPart2( Integer articleId) {
     
         setTitle("Create new article");
         setSize(800, 400);
@@ -79,7 +79,7 @@ public class CreateNewArticleViewPart2 extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new CreateNewArticleViewPart2();
+                new CreateNewArticleViewPart2(null);
             }
         });
     }

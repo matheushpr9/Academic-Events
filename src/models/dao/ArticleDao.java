@@ -56,7 +56,7 @@ public class ArticleDao implements Dao<Article>{
                 String evaluation2Id = rs.getString("evaluation2Id");
                 String evaluation3Id = rs.getString("evaluation3Id");
                 
-                article = new Article(Integer.parseInt(id), Integer.parseInt(eventId), title, Arrays.stream(authorsIdArray).boxed().toArray(Integer[]::new), summary, keywordsList, Boolean.parseBoolean(involveHumans) , processNumber, pdfFile, Integer.parseInt(subAreaId),Integer.parseInt(evaluation1Id),Integer.parseInt(evaluation2Id),Integer.parseInt(evaluation3Id));
+                article = new Article(Integer.parseInt(id), Integer.parseInt(eventId), title, Arrays.stream(authorsIdArray).boxed().toArray(String[]::new), summary, keywordsList, Boolean.parseBoolean(involveHumans) , processNumber, pdfFile, Integer.parseInt(subAreaId),Integer.parseInt(evaluation1Id),Integer.parseInt(evaluation2Id),Integer.parseInt(evaluation3Id));
                 
             }
 
@@ -79,30 +79,29 @@ public class ArticleDao implements Dao<Article>{
             
          try{
     
-            String selectSQL = "SELECT * FROM Author"; 
+            String selectSQL = "SELECT * FROM Article"; 
     
             PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
     
             preparedStatement.setQueryTimeout(30); 
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()) {
-                String articleId = rs.getString("articleId");
-                String eventId = rs.getString("eventId");
-                String title = rs.getString("title");
+                String articleId = rs.getString("articleId") != null ? rs.getString("articleId") : "0";
+                String eventId = rs.getString("academicEventId") != null ? rs.getString("academicEventId") : "";
+                String title = rs.getString("title") != null ? rs.getString("title") : "";
                 String[] authorsId = rs.getString("authorsId").split(",");
-                int[] authorsIdArray = Arrays.stream(authorsId).mapToInt(Integer::parseInt).toArray();
-                String summary = rs.getString("summary");
-                String keywords = rs.getString("keywords");
+                String summary = rs.getString("summary") != null ? rs.getString("summary") : "";
+                String keywords = rs.getString("keyword") != null ? rs.getString("keyword") : "";
                 List<String> keywordsList = new ArrayList<String>(Arrays.asList(keywords.split(",")));
-                String involveHumans = rs.getString("involveHumans");
-                String processNumber = rs.getString("processNumber");
-                String pdfFile = rs.getString("pdfFile");
-                String subAreaId = rs.getString("subAreaId");
-                String evaluation1Id = rs.getString("evaluation1Id");
-                String evaluation2Id = rs.getString("evaluation2Id");
-                String evaluation3Id = rs.getString("evaluation3Id");
+                String involveHumans = rs.getString("involveHumans") != null ? rs.getString("involveHumans") : "";
+                String processNumber = rs.getString("processNumber") != null ? rs.getString("processNumber") : "";
+                String pdfFile = rs.getString("pdfFile") != null ? rs.getString("pdfFile") : "";
+                String subAreaId = rs.getString("subAreaId") != null ? rs.getString("subAreaId") : "0";
+                String evaluation1Id = rs.getString("evaluation1Id") != null ? evaluation1Id = rs.getString("evaluation1Id") : "0";
+                String evaluation2Id = rs.getString("evaluation2Id") != null ? rs.getString("evaluation2Id") : "0";
+                String evaluation3Id = rs.getString("evaluation3Id") != null ? rs.getString("evaluation3Id") : "0";
                 
-                article = new Article(Integer.parseInt(articleId), Integer.parseInt(eventId) ,title, Arrays.stream(authorsIdArray).boxed().toArray(Integer[]::new), summary, keywordsList, Boolean.parseBoolean(involveHumans) , processNumber, pdfFile, Integer.parseInt(subAreaId),Integer.parseInt(evaluation1Id),Integer.parseInt(evaluation2Id),Integer.parseInt(evaluation3Id));
+                article = new Article(Integer.parseInt(articleId), Integer.parseInt(eventId) ,title, authorsId, summary, keywordsList, Boolean.parseBoolean(involveHumans) , processNumber, pdfFile, Integer.parseInt(subAreaId),Integer.parseInt(evaluation1Id),Integer.parseInt(evaluation2Id),Integer.parseInt(evaluation3Id));
     
                 articles.add(article);
                 
@@ -123,7 +122,7 @@ public class ArticleDao implements Dao<Article>{
         Integer articleId = article.getArticleId();
         Integer eventId = article.getEventId();
         String title = article.getTitle();
-        Integer[] authorsId = article.getAuthorsId();
+        String[] authorsId = article.getAuthorsId();
         String authorsIdString = authorsId != null ? authorsId.toString(): null;
         String summary = article.getSummary();
         List<String> keywords = article.getKeywords();
@@ -156,7 +155,7 @@ public class ArticleDao implements Dao<Article>{
         String title = map.get("title") !=null ? map.get("title") : updatedArticle.getTitle();
         String [] authorsIdStrings = map.get("authorsId").split(",");
         int[] authorsIdArray = Arrays.stream(authorsIdStrings).mapToInt(Integer::parseInt).toArray();
-        Integer[] authorsId = map.get("authorsId") !=null ? Arrays.stream(authorsIdArray).boxed().toArray(Integer[]::new) : updatedArticle.getAuthorsId();
+        String[] authorsId = map.get("authorsId") !=null ? Arrays.stream(authorsIdArray).boxed().toArray(String[]::new) : updatedArticle.getAuthorsId();
         String summary = map.get("summary") !=null ? map.get("summary") : updatedArticle.getSummary();
         List<String> keywords = map.get("keywords") !=null ? new ArrayList<String>(Arrays.asList(map.get("keywords").split(",")))  : updatedArticle.getKeywords();
         boolean involveHumans = map.get("involveHumans") !=null ? Boolean.parseBoolean(map.get("involveHumans")) : updatedArticle.isInvolveHumans();

@@ -97,7 +97,7 @@ public class AuthorDao implements Dao<Author>{
     @Override
     public void update(Author author, Map<String, String> map){
 
-        String authorDocument = map.get("authorDocument") ;
+        String authorDocument = map.get("authorDocument");
         Author updatedAuthor = this.get(authorDocument).stream().findFirst().get();
 
         String name = map.get("name") != null ? map.get("name") : updatedAuthor.getName();

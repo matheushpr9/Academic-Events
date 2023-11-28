@@ -1,24 +1,20 @@
 package models.users;
 
-import java.util.List;
-
 public class Revisor extends BaseUser{
     private String phone;
     private String document;// cpf for brazilian and rne foe foreign
     private String lattes;
     private String workingInstitution;
     private String researchId;
-    private List<String> areasOfInterest;
 
     public Revisor(String name, String email, String password, String phone, String document, String lattes,
-            String workingInstitution, String researchId, List<String> areasOfInterest) {
+            String workingInstitution, String researchId) {
         super(name, email, password);
         this.phone = phone;
         this.document = document;
         this.lattes = lattes;
         this.workingInstitution = workingInstitution;
         this.researchId = researchId;
-        this.areasOfInterest = areasOfInterest;
     }
 
     public String getPhone() {
@@ -60,14 +56,5 @@ public class Revisor extends BaseUser{
     public void setResearchId(String researchId) {
         this.researchId = researchId;
     }
-
-    public List<String> getAreasOfInterest() {
-        return areasOfInterest;
-    }
-
-    public void setAreasOfInterest(List<String> areasOfInterest) {
-        this.areasOfInterest = areasOfInterest;
-    }
-    
 
 }

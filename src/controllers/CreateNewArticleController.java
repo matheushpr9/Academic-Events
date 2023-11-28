@@ -59,7 +59,7 @@ public class CreateNewArticleController {
 
     }
 
-    public static void sendFirstForm( Integer eventId, String title, Integer[] authorsId,String summary, List<String> keywords, boolean involveHumans, String processNumber, String pdfFile, Integer subAreaId){
+    public static void sendFirstForm( Integer eventId, String title, String[] authorsId,String summary, List<String> keywords, boolean involveHumans, String processNumber, String pdfFile, Integer subAreaId){
         Article article = new Article(  eventId,  title, authorsId, summary, keywords, involveHumans, processNumber, pdfFile, subAreaId);
         ArticleDao articleDao = new ArticleDao();
         articleDao.save(article);
@@ -85,6 +85,15 @@ public class CreateNewArticleController {
         }
 
         return listedAuthorsToDropdown;
+
+    }
+
+    public static void getArticleId(Article article){
+        
+    }
+    
+
+    public static void sendSecondForm(Integer a){
 
     }
      
