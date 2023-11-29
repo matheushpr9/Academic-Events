@@ -20,7 +20,7 @@ INSERT INTO Subarea(title , areaId )
 VALUES
     ('Linux',1),
     ('Artificial Intelligence',1),
-    ("women's health", 2)
+    ('womens health', 2)
 ;
 SELECT * FROM Author;
 SELECT * FROM Revisor;    
