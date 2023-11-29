@@ -1,18 +1,36 @@
-## Getting Started
+# Academic events V1.0.0
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+This is a project developed in Java for the subjects of software architecture and object-oriented programming. Its focus is to meet the demands of an academic event manager.
 
-## Folder Structure
+## Current status
 
-The workspace contains two folders by default, where:
+The application is not 100% finished, so I'm going to list how we should run it:
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+### Building the app
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+To upload the application, the dependencies must be resolved and the database created and fed.
+To do this, we developed this script:
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+For linux:
 
-## Dependency Management
+``` bash
+sh init_app.sh
+```
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+For Windows:
+
+``` bat
+.\init_app.bat
+```
+
+### Author
+
+To test the author's functionalities, which currently only involve creating articles.
+
+You must log in with author test, where the login is *1* and the password *1*.
+
+### Revisor 
+
+To test the functionality of the Reviewer, which basically lists the articles you have created.
+
+You must log in with the login *XXX.XXX.XXX-XX* and the password *K%JpG3XvN#bH5@nE!mqJSNc2HB4Sbwh*.
