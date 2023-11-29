@@ -1,6 +1,8 @@
 package controllers;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import models.classes.AcademicEvent;
 import models.classes.Article;
@@ -88,13 +90,24 @@ public class CreateNewArticleController {
 
     }
 
-    public static void getArticleId(Article article){
-        
+    public static Article getArticle(String eventId, String title, String summary){
+        ArticleDao articleDao = new ArticleDao();
+
+        Article article = articleDao.getArticle( eventId, title, summary);
+
+        return article;
     }
     
 
-    public static void sendSecondForm(Integer a){
+    public static void sendSecondForm(Article article){
+        ArticleDao articleDao = new ArticleDao();
 
+        Map<String, String> articleMapOne;
+
+        articleMapOne = new HashMap<>();
+
+
+        articleDao.update(article,articleMapOne);
     }
      
 }

@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import controllers.CreateNewArticleController;
+import models.classes.Article;
 
 public class CreateNewArticleView extends JFrame {
 
@@ -119,8 +120,11 @@ public class CreateNewArticleView extends JFrame {
 
                 List<String> keywordsList = Arrays.asList(keywordsString.split(","));
                 CreateNewArticleController.sendFirstForm(eventId, title, null,summary, keywordsList,involveHumans,processNumber, filePath, subareaId);
+                
+                Article article = CreateNewArticleController.getArticle(eventId.toString(),title,summary);
+
                 setVisible(false);
-                new CreateNewArticleViewPart2(null).setVisible(true);
+                new CreateNewArticleViewPart2(article).setVisible(true);
             }
         });
 

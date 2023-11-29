@@ -3,6 +3,9 @@ package views;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import controllers.RevisorHomePageController;
+import models.classes.Article;
+import java.util.List;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +13,7 @@ import java.awt.event.ActionListener;
 public class AuthorHomePageView extends JFrame {
 
     private JButton newArticleButton;
-    private JTable articleTable;
+    private JTable articlesTable;
     private DefaultTableModel tableModel;
 
     public AuthorHomePageView() {
@@ -28,9 +31,21 @@ public class AuthorHomePageView extends JFrame {
             }
         });
 
+        //List <Article> articles = RevisorHomePageController.getAllArticleByAuthorDocument(document);
+
+
+        articlesTable = new JTable();
         tableModel = new DefaultTableModel();
-        articleTable = new JTable(tableModel);
-        JScrollPane scrollPane = new JScrollPane(articleTable);
+        tableModel.addColumn("Title");
+        tableModel.addColumn("Keywords");
+        tableModel.addColumn("File path");
+
+        //for(Article article: articles ){
+        //    tableModel.addRow(new Object[]{article.getTitle(), article.getKeywords().toString().replace("[", "").replace("]", ""), article.getPdfFile()});
+        //}
+
+     
+        JScrollPane scrollPane = new JScrollPane(articlesTable);
 
         // Layout
         setLayout(new BorderLayout());
@@ -40,12 +55,4 @@ public class AuthorHomePageView extends JFrame {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new AuthorHomePageView();
-            }
-        });
-    }
 }

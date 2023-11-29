@@ -11,4 +11,12 @@ public class RevisorHomePageController {
         
         return articles;
     }
+
+    public static List<Article> getAllArticleByAuthorDocument(String document){
+        ArticleDao articleDao = new ArticleDao();
+        List<Article> articles = articleDao.getAll();
+        
+        return articles;
+    }
+
 }

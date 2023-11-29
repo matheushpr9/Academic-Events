@@ -34,7 +34,7 @@ public class Article {
     }
 
     public Article(Integer articleId, Integer eventId, String title, String[] authorsId, String summary, List<String> keywords,
-            boolean involveHumans, String processNumber, String pdfFile, int subAreaId) {
+            boolean involveHumans, String processNumber, String pdfFile, Integer subAreaId) {
         this.articleId = articleId;
         this.eventId = eventId;
         this.title = title;
@@ -52,7 +52,7 @@ public class Article {
 
 
     public Article(Integer articleId, Integer eventId, String title, String[] authorsId, String summary, List<String> keywords,
-            boolean involveHumans, String processNumber, String pdfFile, int subAreaId, int evaluation1Id, int evaluation2, int evaluation3){
+            boolean involveHumans, String processNumber, String pdfFile, int subAreaId, Integer evaluation1Id, Integer evaluation2, Integer evaluation3){
         this.articleId = articleId;
         this.eventId = eventId;
         this.title = title;

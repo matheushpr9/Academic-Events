@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import controllers.CreateNewArticleController;
+import models.classes.Article;
+
 import java.util.List;
 
 public class CreateNewArticleViewPart2 extends JFrame {
@@ -14,7 +16,7 @@ public class CreateNewArticleViewPart2 extends JFrame {
     private JButton addButton;
     private JButton createArticleButton;
 
-    public CreateNewArticleViewPart2( Integer articleId) {
+    public CreateNewArticleViewPart2( Article article) {
     
         setTitle("Create new article");
         setSize(800, 400);
@@ -54,7 +56,15 @@ public class CreateNewArticleViewPart2 extends JFrame {
             public void actionPerformed(ActionEvent e) {
             
                 String selectedAuthors = selectedAuthorsText.getText();
+
+                article.setAuthorsId(selectedAuthors.split(","));
+
+                CreateNewArticleController.sendSecondForm(article);
                 JOptionPane.showMessageDialog(CreateNewArticleViewPart2.this, "New article created with the following authors:\n" + selectedAuthors);
+
+                setVisible(false);
+                new AuthorHomePageView().setVisible(true);
+
             }
         });
 
@@ -75,12 +85,4 @@ public class CreateNewArticleViewPart2 extends JFrame {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new CreateNewArticleViewPart2(null);
-            }
-        });
-    }
 }
